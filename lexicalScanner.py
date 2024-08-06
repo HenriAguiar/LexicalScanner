@@ -53,20 +53,20 @@ def is_number(value):
         return False
 
 def verificaToken(token):
-    tokens = {
-        "reservadas": ("while", "do"),
-        "operadores": ("<", "=", "+"),
-        "terminador": (";"),
-        "identificador": ("i", "j")
+    tokens_dict = {
+        "while": "reservada",
+        "do": "reservada",
+        "<": "operador",
+        "=": "operador",
+        "+": "operador",
+        ";": "terminador",
+        "i": "identificador",
+        "j": "identificador"
     }
-    if is_number(token):
-        if len(token) > 1:
-            return "constante"
-        else:
-            return "numero"
-    for tipo, valores in tokens.items():
-        if token in valores:
-            return tipo
-    return None
+    tipo=tokens_dict.get(token, False)
+    if tipo==False:
+        if is_number(token):
+            return "constante" if len(token) > 1 else "numero"
 
+    return tipo
 
