@@ -1,0 +1,2 @@
+while g   h for   -    i < 100 do  i = i +  j  ;
+while g   h for   -    i < 100 do  i = i +  j  ;
