@@ -13,7 +13,7 @@ def tokenizador(entrada):
             linha = entrada[l]
             while i < len(linha):
                 char = linha[i]
-                if char in (" ", ";", "<", ">", "=", "-", "+"):
+                if char in (" ", ";", "<", ">", "=", "+"):
                     tipo = verificaToken(tokenAtual)
                     if tokenAtual:
                         if tipo=="identificador" or tipo=="constante":
@@ -26,6 +26,7 @@ def tokenizador(entrada):
                             escritor.writerow([tokenAtual,tipo,len(tokenAtual),(l, i-1)])
                             tokenAtual = ""
                         else:
+                            print(f"Token '{tokenAtual}' não identificado na posição {i} da linha {l}")
                             tokenAtual = ""
                     elif char != " ":
                         escritor.writerow([char,tipo,len(tokenAtual),(l, i)])
@@ -35,6 +36,8 @@ def tokenizador(entrada):
             if tokenAtual:
                 if verificaToken(tokenAtual):
                     escritor.writerow([tokenAtual,tipo,len(tokenAtual),(l, i)])
+                else:
+                    print(f"Token '{tokenAtual}' não identificado na posição {i} da linha {l}")
             l+=1
     with open("tabelaSimbolos.csv", 'w', newline='') as file:
         escritor = csv.writer(file)
